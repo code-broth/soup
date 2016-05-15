@@ -2,9 +2,9 @@
   "name": "soup",
   "version": "1.0.0",
   "description": "Peasants eat soup.",
-  "main": "Client/app.js",
+  "main": "Client/client.js",
   "scripts": {
-    "test": "node --harmony Client/app.js"
+    "test": "node --harmony Client/client.js"
   },
   "repository": {
     "type": "git",

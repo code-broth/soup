@@ -1,0 +1,18 @@
+{
+  "name": "soup",
+  "version": "1.0.0",
+  "description": "Peasants eat soup.",
+  "main": "Client/app.js",
+  "scripts": {
+    "test": "node --harmony Client/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/code-broth/soup.git"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/code-broth/soup/issues"
+  },
+  "homepage": "https://github.com/code-broth/soup#readme"
+}

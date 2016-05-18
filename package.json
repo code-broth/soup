@@ -15,7 +15,7 @@
     "url": "https://github.com/code-broth/soup/issues"
   },
   "homepage": "https://github.com/code-broth/soup#readme",
-  "devDependencies": {
+  "dependencies": {
     "electron-prebuilt": "^1.1.0"
   }
 }

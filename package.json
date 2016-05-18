@@ -4,7 +4,9 @@
   "description": "Peasants eat soup.",
   "main": "Client/client.js",
   "scripts": {
-    "start": "electron Client/client.js"
+    "start": "electron Client/client.js",
+    "start_client":"electron Client/net.js",
+    "start_server": "node --harmony Server/server.js"
   },
   "repository": {
     "type": "git",

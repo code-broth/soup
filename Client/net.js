@@ -1,31 +1,17 @@
 
-var net = require('net');
+const net = require('net')
 
-var HOST = '127.0.0.1';
-var PORT = 45654;
+const HOST = '127.0.0.1'
+const PORT = 45654
 
-var client = new net.Socket();
-client.connect(PORT, HOST, function() {
+exports.connect = function( ondata ){
 
-    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
-    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
-    client.write('I am Chuck Norris!');
+  let client = new net.Socket()
 
-});
+  client.connect(PORT, HOST, function() {})
 
-// Add a 'data' event handler for the client socket
-// data is what the server sent to this socket
-client.on('data', function(data) {
+  client.on('data', text => ondata( JSON.parse( text ) ))
 
-    console.log('DATA: ' + data);
-    // Close the client socket completely
-    client.destroy();
-
-});
-
-// Add a 'close' event handler for the client socket
-client.on('close', function() {
-    console.log('Connection closed');
-});
+}
 
 //http://www.hacksparrow.com/tcp-socket-programming-in-node-js.html

@@ -1,26 +1,24 @@
 "use strict"
 
-require('net')
-.createServer(function(sock) {
+const PORT = 45654
 
-    // We have a connection - a socket object is assigned to the connection automatically
-    console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
+let clients = []
 
-    // Add a 'data' event handler to this instance of socket
-    sock.on('data', function(data) {
+function remove( client ) {
+  clients.splice( clients.indexOf(client), 1 )
+}
 
-        console.log('DATA ' + sock.remoteAddress + ': ' + data);
-        // Write the data back to the socket, the client will receive it as data from the server
-        sock.write('You said "' + data + '"');
-
-    });
-
-    // Add a 'close' event handler to this instance of socket
-    sock.on('close', function(data) {
-        console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
-    });
-
+require('net').createServer(function(sock) {
+    clients.push(sock)
+    sock.on('close', function(data) { remove( sock ) })
 })
-.listen(45654)
+.listen(PORT)
+
+exports.publish = function( world ){
+  let json_world = JSON.stringify( world )
+  for ( let client of clients ){
+    client.write( json_world )
+  }
+}
 
 //http://www.hacksparrow.com/tcp-socket-programming-in-node-js.html

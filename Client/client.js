@@ -3,9 +3,12 @@ const {app} = electron
 const {BrowserWindow} = electron
 
 function createWindow() {
+
   win = new BrowserWindow({fullscreen:true});
 
   win.loadURL(`file://${__dirname}/index.html`)
+
+  win.webContents.openDevTools()
 
   /*win.on('closed', () => {
     // Dereference the window object, usually you would store windows

@@ -1,20 +1,25 @@
 const THREE = require('THREE')
 
-let scene = new THREE.Scene()
-let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 )
+scene = new THREE.Scene();
 
-let renderer = new THREE.WebGLRenderer()
-renderer.setSize( window.innerWidth, window.innerHeight )
-document.body.appendChild( renderer.domElement )
+camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+camera.position.z = 5;
 
-let geometry = new THREE.BoxGeometry( 1, 1, 1 )
-let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+geometry = new THREE.BoxGeometry( 1, 1, 1 );
+material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+
+renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+
+document.body.appendChild( renderer.domElement );
 
 let render = function () {
   requestAnimationFrame( render )
   renderer.render(scene, camera)
 }
 render()
+
+// -------------------------------------------------------------------------- //
 
 let peasants = []
 
@@ -31,4 +36,11 @@ function remove_peasant(){
 exports.render_world = function( world ){
     // world will be a list of peasants
     // world will be of the form [ [x,y,z], [x,y,z], ... ]
+
+    while (world.length < peasants.length) { remove_peasant() }
+    while (world.length > peasants.length) { create_peasant() }
+
+    for (let i in peasants) {
+      peasants[i].position.set( ...world[i] )
+    }
 }
